@@ -1,0 +1,19 @@
+1. Symulacja œledzonych urz¹dzeñ
+ - >100K urz¹dzeñ symulowanych na serwerze (serwerach) Azure
+ - urz¹dzenia symulowany przy u¿yciu zaplikacji cmdline opartej na bibliotece gloox
+ - raportowanie losowej pozycji w predefiniowanych odstêpach czasu (dobraæ wartoœci na podstawie testów performance UNSa)
+ - zdalna zmiana czêstotliwoœci raportowania (przez komende XMPP)
+
+2. Aplikacja na telefon z Androidem
+ - raportowanie lokalizacji i presence
+ - przycisk z emergency
+
+3. Aplikacja na Raspberry Pi
+ - raportowanie lokalizacji (sta³e)
+ - jeden lub kilka przycisków na GPIO wywo³uj¹cych raportowanie emergency
+ - [OPCJA] lampki/si³owniki na GPIO sterowane zdalnym poleceniem 
+
+4. Panel kontrolny
+ - aplikacja dobrze wygl¹daj¹ca na du¿ym LCD
+ - widok mapy z lokalizacj¹ wybranych urz¹dzeñ
+ - 
