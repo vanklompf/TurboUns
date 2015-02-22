@@ -5,6 +5,13 @@ VisualStudioVersion = 14.0.22512.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gloox", "gloox\gloox.vcxproj", "{36E32BC3-0645-4C90-8BF5-6495ACB7CF5F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{30C458C5-3FED-42EA-B3B7-605AEEE5E35C}"
+	ProjectSection(SolutionItems) = preProject
+		arch.txt = arch.txt
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PubSubManager", "PubSubManager\PubSubManager.vcxproj", "{460CCD34-C871-4D3E-9F48-8C1E4724E0B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -15,6 +22,10 @@ Global
 		{36E32BC3-0645-4C90-8BF5-6495ACB7CF5F}.Debug|x86.Build.0 = Debug|Win32
 		{36E32BC3-0645-4C90-8BF5-6495ACB7CF5F}.Release|x86.ActiveCfg = Release|Win32
 		{36E32BC3-0645-4C90-8BF5-6495ACB7CF5F}.Release|x86.Build.0 = Release|Win32
+		{460CCD34-C871-4D3E-9F48-8C1E4724E0B9}.Debug|x86.ActiveCfg = Debug|Win32
+		{460CCD34-C871-4D3E-9F48-8C1E4724E0B9}.Debug|x86.Build.0 = Debug|Win32
+		{460CCD34-C871-4D3E-9F48-8C1E4724E0B9}.Release|x86.ActiveCfg = Release|Win32
+		{460CCD34-C871-4D3E-9F48-8C1E4724E0B9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
