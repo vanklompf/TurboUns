@@ -1,4 +1,5 @@
 #include <gloox.h>
+#include <winsock2.h>
 
 #include <connectionbase.h>
 #include <connectiontcpbase.h>
@@ -12,6 +13,7 @@
 
 #include <cstdio>
 #include <vector>
+#include <algorithm>
 
 using namespace gloox;
 
@@ -19,7 +21,7 @@ static const char* USER_PREFIX = "deviceA_";
 static const char* XMPP_SERVER = "xmppeval.cloudapp.net";
 static const char* XMPP_DOMAIN = "city.gov";
 static const char* DEFAULT_PASSWORD = "password";
-static const int NUM_USERS = 100;
+static const int NUM_USERS = 200;
 
 class XMPP_Client : public ConnectionListener, MessageHandler, RegistrationHandler
 {
@@ -30,7 +32,7 @@ public:
   void connect();
   bool needRegistration() const;
   void registerAccount();
-  void loop();
+  void recv();
   int getSocket() const;
 
   // ConnectionListener
@@ -168,51 +170,40 @@ void XMPP_Client::registerAccount()
   m_registration->createAccount(Registration::FieldUsername | Registration::FieldPassword, fields);
 }
 
-void XMPP_Client::loop()
+void XMPP_Client::recv()
 {
-  while (1)
-  {
-    m_client->recv();
-  };
+    m_client->recv(0);
 }
 
 int XMPP_Client::getSocket() const
 {
-    return ((ConnectionTCPBase*)(m_client->connectionImpl()))->socket();
+    return (static_cast<ConnectionTCPBase*>(m_client->connectionImpl()))->socket();
 }
+
 
 int main()
 {
-    /*std::vector<XMPP_Client*> clients;
+    fd_set client_sockets;
+    FD_ZERO(&client_sockets);
+
+    std::vector<XMPP_Client*> clients;
     clients.resize(NUM_USERS);
     
-    int id = 0;
-    for (auto client : clients)
+    int id = 2000;
+
+    for (auto& client : clients) 
     {
         client = new XMPP_Client(id++, XMPP_DOMAIN, DEFAULT_PASSWORD, XMPP_SERVER);
-    }*/
+        client->connect();
+        FD_SET(client->getSocket(), &client_sockets);
+    }
 
-    int x = 800;
-    XMPP_Client client1(x++, XMPP_DOMAIN, DEFAULT_PASSWORD, XMPP_SERVER);
-    XMPP_Client client2(x++, XMPP_DOMAIN, DEFAULT_PASSWORD, XMPP_SERVER);
-    XMPP_Client client3(x++, XMPP_DOMAIN, DEFAULT_PASSWORD, XMPP_SERVER);
-    XMPP_Client client4(x++, XMPP_DOMAIN, DEFAULT_PASSWORD, XMPP_SERVER);
+    do
+    {
+        select(NUM_USERS, &client_sockets, 0, 0, nullptr);
+        std::for_each(clients.begin(), clients.end(), [](XMPP_Client* c) { c->recv(); });
 
+    } while (true);
 
-
-  client1.connect();
-  client2.connect();
-  client3.connect();
-  client4.connect();
-
-
-
-  //fd_set client_sockets;
-  //client.sockets
-
-  //select(0, x, 0, 0, nullptr);
-
-  //client.loop();
-
-  system("pause");
+    system("pause");
 }
